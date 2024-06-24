@@ -6,7 +6,7 @@ Running Robotframework inside Docker container
 
 > docker build -t testenv:latest .
 
-## Run test with Docker Compose
+## Run your tests
 
 > docker run --name test --rm -v .:/robot testenv:latest
 
