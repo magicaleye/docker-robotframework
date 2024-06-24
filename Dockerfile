@@ -19,4 +19,4 @@ RUN python3 -m pip install robotframework \
 WORKDIR /robot 
 VOLUME /robot
 
-CMD ["/robot/scripts/run_suite.sh", "${BROWSER}", "${BROWSER_VERSION}"]
+CMD ["/robot/scripts/run_suite.sh"]
