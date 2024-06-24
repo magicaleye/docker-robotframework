@@ -15,6 +15,8 @@ RUN python3 -m pip install robotframework \
 #     && rm google-chrome*.deb 
 
 WORKDIR /robot 
+COPY ./scripts/run_suite.sh /robot/scripts/run_suite.sh
+RUN chmod u+x /robot/scripts/run_suite.sh
 VOLUME /robot
 
 ENV BROWSER="chrome" BROWSER_VERSION="stable" headless="True" TAG=""
