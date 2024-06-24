@@ -1,4 +1,4 @@
-FROM python:3.12-bullseye
+FROM python:3.12.4-bookworm
 
 RUN apt-get update \
     && apt-get install -y xvfb wget ca-certificates fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 \
