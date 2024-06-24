@@ -7,7 +7,9 @@ RUN apt-get update \
 
 RUN python3 -m pip install robotframework \
     robotframework-seleniumlibrary \
-    selenium
+    selenium \
+    robotframework-requests \
+    robotframework-jsonlibrary
 
 # install chrome and chromedriver in one run command to clear build caches for new versions (both version need to match)
 # RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -15,10 +17,10 @@ RUN python3 -m pip install robotframework \
 #     && rm google-chrome*.deb 
 
 WORKDIR /robot 
-COPY ./scripts/run_suite.sh /robot/scripts/run_suite.sh
-RUN chmod u+x /robot/scripts/run_suite.sh
+COPY ./run_suite.sh /robot/run_suite.sh
+RUN chmod u+x /robot/run_suite.sh
 VOLUME /robot
 
 ENV BROWSER="chrome" BROWSER_VERSION="stable" headless="True" TAG=""
 
-CMD ["/robot/scripts/run_suite.sh"]
+CMD ["/robot/run_suite.sh"]
