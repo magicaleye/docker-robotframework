@@ -6,6 +6,9 @@ Test Teardown    Close All Browsers
 
 *** Variables ***
 ${url}    https://the-internet.herokuapp.com/
+${BROWSER}    chrome
+${BROWSER_VERSION}    stable
+${headless}    ${False}
 ${menu_add_remove_elements}    //a[text()='Add/Remove Elements']
 ${menu_basic_auth}    //a[text()='Basic Auth']
 ${menu_dropdown}    //a[text()='Dropdown']
@@ -30,7 +33,11 @@ Verify File Downloaded
 
 Open Browser And Go To URL
     [Arguments]    ${url}    ${BROWSER}    ${BROWSER_VERSION}
-    Open Browser    ${url}    ${BROWSER}      options=add_argument("--no-sandbox"); add_argument("--headless"); browser_version("${BROWSER_VERSION}")
+    IF    ${headless}==${True}
+        Open Browser    ${url}    ${BROWSER}      options=add_argument("--no-sandbox"); add_argument("--headless"); browser_version("${BROWSER_VERSION}")
+    ELSE
+        Open Browser    ${url}    ${BROWSER}      options=browser_version("${BROWSER_VERSION}")
+    END
     ${info}=
     ...    Execute Javascript
     ...    return navigator.userAgent;
