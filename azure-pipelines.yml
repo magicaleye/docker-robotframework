@@ -12,7 +12,7 @@ variables:
 parameters:
 - name: browser
   type: string
-  default: 'chrome'
+  default: 'firefox'
   values:
   - 'chrome'
   - 'firefox'  
@@ -33,7 +33,7 @@ stages:
   displayName: Build Test Environment
   jobs:
   - job: Build
-    displayName: Build job
+    displayName: Build jobs
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -48,13 +48,13 @@ stages:
       inputs:
         targetPath: '$(imageName)_$(imageTag).tar'
         artifact: 'docker-image'
-      displayName: 'Publish Docker Image Artifact'
+      displayName: 'Publish Docker Image'
 
 - stage: Test
-  displayName: Running Tests    
+  displayName: Test
   jobs:
   - job: Test
-    displayName: Test
+    displayName: Test jobs
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -62,7 +62,7 @@ stages:
       inputs:
         artifact: 'docker-image'
         path: '.'
-      displayName: 'Download Docker Image Artifact'
+      displayName: 'Download Docker Image'
     - task: DockerInstaller@0
       inputs:
         dockerVersion: '19.03.5'   
@@ -70,7 +70,9 @@ stages:
         docker load -i $(imageName)_$(imageTag).tar
         chmod u+x ./run_suite.sh
         docker run -v ${PWD}:/robot -e "BROWSER=${{ parameters.browser }}" -e "BROWSER_VERSION=${{ parameters.version }}" -e "TAG=${{ parameters.tag }}" $(imageName):$(imageTag)
-      displayName: Run tests on Docker Container 
-    - publish: reports/
-      artifact: reports
-      condition: always()
+      displayName: Run Tests
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: 'reports/'
+        artifact: 'reports'
+      displayName: 'Publish Test Reports'
