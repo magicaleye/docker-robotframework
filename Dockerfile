@@ -9,8 +9,6 @@ RUN python3 -m pip install robotframework \
     robotframework-jsonlibrary
 
 WORKDIR /robot 
-COPY ./run_suite.sh /robot/run_suite.sh
-RUN chmod u+x /robot/run_suite.sh
 VOLUME /robot
 
 ENV BROWSER="chrome" BROWSER_VERSION="stable" TAG="" OUTPUT_DIR="./reports"
