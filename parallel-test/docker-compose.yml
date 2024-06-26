@@ -4,7 +4,7 @@ services:
   chrome-beta:
     image: testenv:latest
     volumes:
-      - ../../.:/robot
+      - ../:/robot
     environment:
       - BROWSER=chrome
       - BROWSER_VERSION=beta
@@ -15,7 +15,7 @@ services:
   edge-stable:
     image: testenv:latest
     volumes:
-      - ../../.:/robot
+      - ../:/robot
     environment:
       - BROWSER=edge
       - BROWSER_VERSION=stable
@@ -26,7 +26,7 @@ services:
   firefox-120:
     image: testenv:latest
     volumes:
-      - ../../.:/robot
+      - ../:/robot
     environment:
       - BROWSER=firefox
       - BROWSER_VERSION=120
@@ -37,7 +37,7 @@ services:
   api:
     image: testenv:latest
     volumes:
-      - ../../.:/robot
+      - ../:/robot
     environment:
       - OUTPUT_DIR=reports/api/
       - TAG="-i api"
