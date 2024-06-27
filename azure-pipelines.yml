@@ -63,13 +63,9 @@ stages:
         artifact: 'docker-image'
         path: '.'
       displayName: 'Download Docker Image'
-    - task: DockerInstaller@0
+    - task: DockerCompose@0
       inputs:
-        dockerVersion: '19.03.5'   
-    - script: |
-        docker load -i $(imageName)_$(imageTag).tar
-        chmod u+x ./run_suite.sh
-        docker run -v ${PWD}:/robot -e "BROWSER=${{ parameters.browser }}" -e "BROWSER_VERSION=${{ parameters.version }}" -e "TAG=${{ parameters.tag }}" $(imageName):$(imageTag)
+        action: Run a Docker Compose command
       displayName: Run Tests
     - task: PublishPipelineArtifact@1
       inputs:
