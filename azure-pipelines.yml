@@ -9,25 +9,6 @@ variables:
   imageName: robot_testenv
   imageTag: $(Build.BuildId)
 
-parameters:
-- name: browser
-  type: string
-  default: 'firefox'
-  values:
-  - 'chrome'
-  - 'firefox'  
-  - 'edge'
-- name: version
-  type: string
-  default: 'stable'
-  values:
-  - 'stable'
-  - 'beta'  
-  - 'canary'  
-- name: tag
-  type: string 
-  default: ' '
-
 stages:
 - stage: Build
   displayName: Build Test Environment
