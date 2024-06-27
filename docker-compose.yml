@@ -5,7 +5,7 @@ services:
       - .:/robot
     environment:
       - BROWSER=chrome
-      - BROWSER_VERSION=stable
+      - BROWSER_VERSION=beta
       - OUTPUT_DIR=reports/chrome/
       - TAG=-i gui
       
@@ -15,7 +15,7 @@ services:
       - .:/robot
     environment:
       - BROWSER=edge
-      - BROWSER_VERSION=stable
+      - BROWSER_VERSION=beta
       - OUTPUT_DIR=reports/edge/
       - TAG=-i gui
       
@@ -25,14 +25,6 @@ services:
       - .:/robot
     environment:
       - BROWSER=firefox
-      - BROWSER_VERSION=stable
+      - BROWSER_VERSION=beta
       - OUTPUT_DIR=reports/firefox/
       - TAG=-i gui
-
-  api:
-    image: testenv:latest
-    volumes:
-      - .:/robot
-    environment:
-      - OUTPUT_DIR=reports/api/
-      - TAG=-i api  
