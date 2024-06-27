@@ -8,8 +8,7 @@ services:
       - BROWSER_VERSION=stable
       - OUTPUT_DIR=reports/chrome/
       - TAG=-i gui
-    restart:no
-
+      
   edge:
     image: testenv:latest
     volumes:
@@ -19,8 +18,7 @@ services:
       - BROWSER_VERSION=stable
       - OUTPUT_DIR=reports/edge/
       - TAG=-i gui
-    restart:no
-
+      
   firefox:
     image: testenv:latest
     volumes:
@@ -30,7 +28,6 @@ services:
       - BROWSER_VERSION=stable
       - OUTPUT_DIR=reports/firefox/
       - TAG=-i gui
-    restart:no
 
   api:
     image: testenv:latest
@@ -38,5 +35,4 @@ services:
       - .:/robot
     environment:
       - OUTPUT_DIR=reports/api/
-      - TAG=-i api
-    restart:no    
+      - TAG=-i api  
