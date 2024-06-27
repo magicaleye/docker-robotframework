@@ -61,4 +61,4 @@ stages:
       inputs:
         targetPath: 'reports/'
         artifact: 'reports'
-      displayName: 'Publish Test Reports'
+      displayName: 'Publish Test Report'
