@@ -1,34 +1,34 @@
 services:
-  chrome-beta:
+  chrome:
     image: testenv:latest
     volumes:
       - .:/robot
     environment:
       - BROWSER=chrome
-      - BROWSER_VERSION=beta
-      - OUTPUT_DIR=reports/chrome-beta/
+      - BROWSER_VERSION=stable
+      - OUTPUT_DIR=reports/chrome/
       - TAG=-i gui
     restart: no
 
-  edge-stable:
+  edge:
     image: testenv:latest
     volumes:
       - .:/robot
     environment:
       - BROWSER=edge
       - BROWSER_VERSION=stable
-      - OUTPUT_DIR=reports/edge-stable/
+      - OUTPUT_DIR=reports/edge/
       - TAG=-i gui
     restart: no
 
-  firefox-120:
+  firefox:
     image: testenv:latest
     volumes:
       - .:/robot
     environment:
       - BROWSER=firefox
-      - BROWSER_VERSION=120
-      - OUTPUT_DIR=reports/firefox-120/
+      - BROWSER_VERSION=stable
+      - OUTPUT_DIR=reports/firefox/
       - TAG=-i gui
     restart: no
 
