@@ -44,10 +44,13 @@ stages:
         artifact: 'docker-image'
         path: '.'
       displayName: 'Download Docker Image'
-    - task: DockerCompose@0
+    - task: DockerInstaller@0
       inputs:
-        action: Run a Docker Compose command
-        dockerComposeCommand: up
+        dockerVersion: '19.03.5'   
+    - script: |
+        docker load -i $(imageName)_$(imageTag).tar
+        chmod u+x ./run_suite.sh
+        docker compose up
       displayName: Run Tests
     - task: PublishPipelineArtifact@1
       inputs:
