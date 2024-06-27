@@ -21,6 +21,7 @@ stages:
     - task: DockerInstaller@0
       inputs:
         dockerVersion: '19.03.5'
+      displayName: Install Docker  
     - script: |
         docker build -t $(imageName):$(imageTag) .
         docker save $(imageName):$(imageTag) -o $(imageName)_$(imageTag).tar
@@ -43,11 +44,16 @@ stages:
       inputs:
         artifact: 'docker-image'
         path: '.'
-      displayName: 'Download Docker Image'
-    - task: DockerCompose@0
+      displayName: 'Download Test Environment Image'
+    - task: DockerInstaller@0
       inputs:
-        action: Run a Docker Compose command
-        dockerComposeCommand: up
+        dockerVersion: '19.03.5'  
+        displayName: Install Docker  
+    - script: |
+        docker load -i $(imageName)_$(imageTag).tar
+        chmod u+x ./run_suite.sh
+        docker compose up
+      displayName: 'Build and Save Docker Image'
       displayName: Run Parallel Test
     - task: PublishPipelineArtifact@1
       inputs:
