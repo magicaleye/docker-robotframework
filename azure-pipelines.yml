@@ -6,8 +6,8 @@ trigger:
 - main
 
 variables:
-  imageName: robot_testenv
-  imageTag: $(Build.BuildId)
+  imageName: testenv
+  imageTag: latest
 
 stages:
 - stage: Build
