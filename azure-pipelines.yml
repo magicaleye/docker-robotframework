@@ -3,7 +3,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- parallel
+ branches:
+   include:
+     - parallel
+   exclude:
+     - main
 
 variables:
   imageName: testenv
@@ -47,13 +51,11 @@ stages:
       displayName: 'Download Test Environment Image'
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '19.03.5'  
-        displayName: Install Docker  
+        dockerVersion: '19.03.5'   
     - script: |
         docker load -i $(imageName)_$(imageTag).tar
         chmod u+x ./run_suite.sh
         docker compose up
-      displayName: 'Build and Save Docker Image'
       displayName: Run Parallel Test
     - task: PublishPipelineArtifact@1
       inputs:
