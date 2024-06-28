@@ -8,8 +8,8 @@ RUN python3 -m pip install robotframework \
     robotframework-requests \
     robotframework-jsonlibrary
 
-WORKDIR /robot 
+WORKDIR /robot
 
-ENV BROWSER="chrome" BROWSER_VERSION="stable" TAG="" OUTPUT_DIR="./reports"
+ENV BROWSER="chrome" BROWSER_VERSION="stable" TAG="" OUTPUT_DIR="./reports" RERUN="false"
 
 CMD ["/robot/run_suite.sh"]

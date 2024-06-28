@@ -39,4 +39,4 @@ services:
     environment:
       - OUTPUT_DIR=reports/api
       - TAG=-i api
-    restart: no    
+    restart: no
