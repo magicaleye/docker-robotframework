@@ -6,7 +6,7 @@ services:
     environment:
       - BROWSER=chrome
       - BROWSER_VERSION=beta
-      - OUTPUT_DIR=reports/chrome/
+      - OUTPUT_DIR=reports/chrome
       - TAG=-i gui
     restart: no
 
@@ -17,7 +17,7 @@ services:
     environment:
       - BROWSER=edge
       - BROWSER_VERSION=stable
-      - OUTPUT_DIR=reports/edge/
+      - OUTPUT_DIR=reports/edge
       - TAG=-i gui
     restart: no
 
@@ -28,7 +28,7 @@ services:
     environment:
       - BROWSER=firefox
       - BROWSER_VERSION=120
-      - OUTPUT_DIR=reports/firefox/
+      - OUTPUT_DIR=reports/firefox
       - TAG=-i gui
     restart: no
 
@@ -37,6 +37,6 @@ services:
     volumes:
       - .:/robot
     environment:
-      - OUTPUT_DIR=reports/api/
+      - OUTPUT_DIR=reports/api
       - TAG=-i api
     restart: no    
