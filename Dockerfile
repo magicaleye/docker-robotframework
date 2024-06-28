@@ -9,7 +9,6 @@ RUN python3 -m pip install robotframework \
     robotframework-jsonlibrary
 
 WORKDIR /robot 
-VOLUME /robot
 
 ENV BROWSER="chrome" BROWSER_VERSION="stable" TAG="" OUTPUT_DIR="./reports"
 
