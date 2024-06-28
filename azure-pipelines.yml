@@ -95,6 +95,7 @@ stages:
       condition: ${{ eq(parameters.rerun, true) }}
       displayName: Retry for failed tests  
     - task: PublishPipelineArtifact@1
+      condition: always()
       inputs:
         targetPath: 'reports/'
         artifact: 'reports'
