@@ -1,0 +1,80 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+ branches:
+   include:
+     - main
+
+variables:
+  imageName: robot_testenv
+  imageTag: $(Build.BuildId)
+
+parameters:
+- name: browser
+  type: string
+  default: 'firefox'
+  values:
+  - 'chrome'
+  - 'firefox'  
+  - 'edge'
+- name: version
+  type: string
+  default: 'stable'
+  values:
+  - 'stable'
+  - 'beta'  
+  - 'canary'  
+- name: tag
+  type: string 
+  default: ' '
+
+stages:
+- stage: Build
+  displayName: Build Test Environment
+  jobs:
+  - job: Build
+    displayName: Build jobs
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '19.03.5'
+    - script: |
+        docker build -t $(imageName):$(imageTag) .
+        docker save $(imageName):$(imageTag) -o $(imageName)_$(imageTag).tar
+      displayName: 'Build and Save Docker Image'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(imageName)_$(imageTag).tar'
+        artifact: 'docker-image'
+      displayName: 'Publish Docker Image'
+
+- stage: Test
+  displayName: Test
+  jobs:
+  - job: Test
+    displayName: Test jobs
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        artifact: 'docker-image'
+        path: '.'
+      displayName: 'Download Docker Image'
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: '19.03.5'   
+    - script: |
+        docker load -i $(imageName)_$(imageTag).tar
+        chmod u+x ./run_suite.sh
+        docker run -v ${PWD}:/robot -e "BROWSER=${{ parameters.browser }}" -e "BROWSER_VERSION=${{ parameters.version }}" -e "TAG=${{ parameters.tag }}" $(imageName):$(imageTag)
+      displayName: Run Tests
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: 'reports/'
+        artifact: 'reports'
+      displayName: 'Publish Test Reports'
