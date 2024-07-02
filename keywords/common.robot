@@ -18,3 +18,4 @@ Open Browser And Go To URL
     ...    Execute Javascript
     ...    return navigator.userAgent;
     Log To Console    ${info}    
+    Maximize Browser Window

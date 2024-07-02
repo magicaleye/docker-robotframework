@@ -29,6 +29,9 @@ parameters:
 - name: tag
   type: string 
   default: ' '
+- name: rerun
+  type: boolean
+  default: false
 
 stages:
 - stage: Build
@@ -73,7 +76,26 @@ stages:
         chmod u+x ./run_suite.sh
         docker run -v ${PWD}:/robot -e "BROWSER=${{ parameters.browser }}" -e "BROWSER_VERSION=${{ parameters.version }}" -e "TAG=${{ parameters.tag }}" $(imageName):$(imageTag)
       displayName: Run Tests
+    - task: Cache@2
+      inputs:
+        key: $(cacheKey)
+        path: 'reports'
+        cacheHitVar: 'ReportsCacheRestored'
+      displayName: 'Cache Test Reports'
+    - task: Cache@2
+      inputs:
+        key: $(cacheKey)
+        path: 'reports'
+        cacheHitVar: 'ReportsCacheRestored'
+      displayName: 'Restore Cached Reports for Retry'
+    - script: |
+        docker load -i $(imageName)_$(imageTag).tar
+        chmod u+x ./run_suite.sh
+        docker run -v ${PWD}:/robot -e "BROWSER=${{ parameters.browser }}" -e "BROWSER_VERSION=${{ parameters.version }}" -e "TAG=${{ parameters.tag }}" -e "RERUN=true" $(imageName):$(imageTag)
+      condition: ${{ eq(parameters.rerun, true) }}
+      displayName: Retry for failed tests  
     - task: PublishPipelineArtifact@1
+      condition: always()
       inputs:
         targetPath: 'reports/'
         artifact: 'reports'

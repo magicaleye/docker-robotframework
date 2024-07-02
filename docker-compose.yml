@@ -18,7 +18,7 @@ services:
       - BROWSER=edge
       - BROWSER_VERSION=stable
       - OUTPUT_DIR=reports/edge
-      - TAG=-i gui
+      - TAG=-i gui      
     restart: no
 
   firefox:
@@ -29,7 +29,7 @@ services:
       - BROWSER=firefox
       - BROWSER_VERSION=120
       - OUTPUT_DIR=reports/firefox
-      - TAG=-i gui
+      - TAG=-i gui      
     restart: no
 
   api:
@@ -38,5 +38,5 @@ services:
       - .:/robot
     environment:
       - OUTPUT_DIR=reports/api
-      - TAG=-i api
-    restart: no    
+      - TAG=-i api    
+    restart: no
