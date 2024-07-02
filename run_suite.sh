@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Set default value for RERUN if not set
-RERUN="${rerun:-false}"
+RERUN="${RERUN:-false}"
 
 if [ "$RERUN" = "true" ]; then
     # Commands for rerun=true

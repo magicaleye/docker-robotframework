@@ -3,9 +3,8 @@ ${url}    https://the-internet.herokuapp.com/
 ${BROWSER}    chrome
 ${BROWSER_VERSION}    stable
 ${headless}    ${False}
-${menu_add_remove_elements}    //a[text()='Add/Remove Elements1']
-${menu_basic_auth}    //a[text()='Basic Aut2']
-${menu_dropdown}    //a[text()='Dropdow3']
+${menu_add_remove_elements}    //a[text()='Add/Remove Elements']
+${menu_dropdown}    //a[text()='Dropdown']
 ${menu_js_alert}    //a[text()='JavaScript Alerts']
 ${btn_add_element}    //button[text()='Add Element']
 ${btn_delete}    //button[text()='Delete']
