@@ -1,7 +1,7 @@
 *** Settings ***
 Resource    ../../imports/import.robot
 Test Teardown    Close All Browsers
-Force Tags  gui
+Test Tags    gui
 
 *** Test Cases ***
 Add and Remove Elements

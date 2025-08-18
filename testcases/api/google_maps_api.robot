@@ -1,6 +1,6 @@
 ***Settings***
 Resource    ../../imports/import.robot
-Force Tags  api
+Test Tags   api
 
 ***Test Cases***
 Add a new place

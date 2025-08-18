@@ -1,7 +1,7 @@
 *** Variables ***
 ${url}    https://the-internet.herokuapp.com/
-${BROWSER}    chrome
-${BROWSER_VERSION}    stable
+${BROWSER}    edge
+${BROWSER_VERSION}    beta
 ${headless}    ${False}
 ${menu_add_remove_elements}    //a[text()='Add/Remove Elements']
 ${menu_dropdown}    //a[text()='Dropdown']
